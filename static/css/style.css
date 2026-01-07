@@ -1,0 +1,96 @@
+:root {
+    --mint: #64D2B7;
+    --mint-dark: #4DB6AC;
+    --mint-light: #E0F2F1;
+    --bg-gray: #F8F9FA;
+    --text-main: #333;
+    --white: #ffffff;
+}
+
+body {
+    background-color: var(--bg-gray);
+    color: var(--text-main);
+    font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    margin: 0;
+    padding-bottom: 80px; /* ナビ用 */
+}
+
+/* スマホ用コンテナ */
+.mobile-wrapper {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--white);
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+/* カードデザイン */
+.card-custom {
+    border-radius: 20px;
+    border: none;
+    background: var(--white);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.card-custom:active {
+    transform: scale(0.98);
+}
+
+/* ボタン */
+.btn-mint {
+    background: linear-gradient(135deg, var(--mint), var(--mint-dark));
+    color: white;
+    border-radius: 50px;
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+}
+
+.btn-mint:hover {
+    color: white;
+    opacity: 0.9;
+}
+
+/* 下部ナビゲーション */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 480px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    z-index: 1000;
+}
+
+.nav-item {
+    text-align: center;
+    color: #999;
+    text-decoration: none;
+    font-size: 0.75rem;
+}
+
+.nav-item.active {
+    color: var(--mint);
+}
+
+.fab {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: var(--mint);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(100,210,183,0.4);
+    text-decoration: none;
+}

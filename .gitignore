@@ -1,0 +1,19 @@
+# Pythonの仮想環境
+venv/
+.venv/
+env/
+
+# Pythonのキャッシュ
+__pycache__/
+*.py[cod]
+
+# データベースファイル (SQLiteなど)
+*.sqlite3
+instance/
+
+# OSが生成する不要なファイル
+.DS_Store
+Thumbs.db
+
+# 環境変数（パスワードなど）
+.env

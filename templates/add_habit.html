@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="p-6">
+    <div class="flex items-center gap-4 mb-8">
+        <a href="/" class="material-symbols-outlined text-text-main">arrow_back</a>
+        <h1 class="text-xl font-bold">新しい習慣</h1>
+    </div>
+
+    <form method="POST" action="/habit/add" class="space-y-6">
+        <div>
+            <label class="text-xs font-bold text-gray-400 uppercase mb-2 block tracking-widest">Habit Name</label>
+            <input type="text" name="habit_name" placeholder="例: 朝の読書" class="w-full p-4 bg-bg-light border-0 rounded-2xl focus:ring-2 focus:ring-primary" required>
+        </div>
+
+        <div>
+            <label class="text-xs font-bold text-gray-400 uppercase mb-2 block tracking-widest">Category</label>
+            <select name="category" class="w-full p-4 bg-bg-light border-0 rounded-2xl focus:ring-2 focus:ring-primary appearance-none">
+                <option value="健康">💪 健康 (Fitness)</option>
+                <option value="学習">📖 学習 (Study)</option>
+                <option value="仕事">💼 仕事 (Work)</option>
+                <option value="趣味">🎨 趣味 (Hobby)</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="text-xs font-bold text-gray-400 uppercase mb-2 block tracking-widest">Frequency</label>
+            <div class="grid grid-cols-2 gap-3">
+                <label class="flex items-center gap-3 p-4 bg-bg-light rounded-2xl cursor-pointer">
+                    <input type="radio" name="frequency" value="毎日" checked class="text-primary focus:ring-primary">
+                    <span class="text-sm font-bold">毎日</span>
+                </label>
+                <label class="flex items-center gap-3 p-4 bg-bg-light rounded-2xl cursor-pointer">
+                    <input type="radio" name="frequency" value="週末" class="text-primary focus:ring-primary">
+                    <span class="text-sm font-bold">週末のみ</span>
+                </label>
+            </div>
+        </div>
+
+        <div>
+            <label class="text-xs font-bold text-gray-400 uppercase mb-2 block tracking-widest">Start Date</label>
+            <input type="date" name="start_date" id="today-date" class="w-full p-4 bg-bg-light border-0 rounded-2xl focus:ring-2 focus:ring-primary" required>
+        </div>
+
+        <button type="submit" class="w-full p-5 bg-text-main text-white font-bold rounded-[2rem] shadow-xl active:scale-95 transition-transform mt-8">
+            習慣を保存する
+        </button>
+    </form>
+</main>
+
+<script>
+    // 初期値として今日の日付をセット
+    document.getElementById('today-date').valueAsDate = new Date();
+</script>
+{% endblock %}
