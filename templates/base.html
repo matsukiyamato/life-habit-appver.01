@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html class="light" lang="ja">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Life - Habit Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9f506",
+                        "text-main": "#181811",
+                        "bg-light": "#f8f8f5"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Spline Sans', sans-serif; background-color: #f1f1f1; }
+        .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="flex justify-center min-h-screen items-center">
+    <div class="w-[390px] h-[844px] bg-white shadow-2xl relative flex flex-col overflow-hidden rounded-[3rem] border-[8px] border-black">
+        <div class="flex-1 overflow-y-auto pb-24">
+            {% block content %}{% endblock %}
+        </div>
+        
+        {% if current_user.is_authenticated %}
+        <nav class="absolute bottom-0 w-full bg-white/95 backdrop-blur-md border-t border-gray-100 px-10 py-5 flex justify-between items-center z-50">
+            <a href="/" class="flex flex-col items-center gap-1 {% if request.path == '/' %}text-text-main font-bold{% else %}text-gray-400{% endif %}">
+                <span class="material-symbols-outlined {% if request.path == '/' %}filled{% endif %}">home</span>
+                <span class="text-[10px]">ホーム</span>
+            </a>
+            <a href="/habit/add" class="flex flex-col items-center gap-1 {% if request.path == '/habit/add' %}text-text-main font-bold{% else %}text-gray-400{% endif %}">
+                <span class="material-symbols-outlined {% if request.path == '/habit/add' %}filled{% endif %}">add_circle</span>
+                <span class="text-[10px]">追加</span>
+            </a>
+            <a href="/logout" class="flex flex-col items-center gap-1 text-gray-400">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="text-[10px]">ログアウト</span>
+            </a>
+        </nav>
+        {% endif %}
+    </div>
+</body>
+</html>
