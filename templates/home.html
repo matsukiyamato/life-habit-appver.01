@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="p-6">
+    <header class="flex justify-between items-start mb-8">
+        <div>
+            <p class="text-xs text-gray-500 font-medium tracking-wider">{{ date }}</p>
+            <h1 class="text-2xl font-bold text-text-main">{{ greeting }}！</h1>
+        </div>
+        <div class="size-10 bg-primary rounded-full flex items-center justify-center font-bold text-text-main shadow-sm">
+            {{ current_user.username[0] | upper }}
+        </div>
+    </header>
+
+    <div class="bg-text-main text-white rounded-[2rem] p-6 mb-8 shadow-xl relative overflow-hidden">
+        <p class="text-xs opacity-60 mb-1 tracking-widest uppercase font-bold">Today's Progress</p>
+        <div class="flex items-baseline gap-1 mb-4">
+            <h2 id="progress-text" class="text-5xl font-bold text-primary">{{ rate }}</h2>
+            <span class="text-xl font-bold text-primary">%</span>
+        </div>
+        
+        <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+            <div id="dynamic-progress-bar" 
+                 class="bg-primary h-full transition-all duration-700 ease-out" 
+                 data-rate="{{ rate }}">
+                 </div>
+        </div>
+        <p class="text-[10px] mt-4 opacity-50 uppercase tracking-widest text-right">残り <span id="remaining-count">{{ remaining }}</span> つの習慣</p>
+    </div>
+
+    <section>
+        <h3 class="font-bold text-lg mb-4 text-text-main">今日の習慣</h3>
+        <div class="space-y-4">
+            {% for habit in habits %}
+            <div class="bg-bg-light p-4 rounded-2xl flex items-center justify-between group transition-all">
+                <div class="flex items-center gap-4">
+                    <button 
+                        data-habit-id="{{ habit.id }}"
+                        onclick="handleToggle(this)"
+                        class="size-12 {% if habit.is_done %}bg-primary text-text-main{% else %}bg-white text-gray-300{% endif %} rounded-xl flex items-center justify-center shadow-sm transition-all"
+                    >
+                        <span class="material-symbols-outlined filled">{% if habit.is_done %}check_circle{% else %}circle{% endif %}</span>
+                    </button>
+                    <div>
+                        <p class="font-bold text-text-main {% if habit.is_done %}line-through opacity-40{% endif %}">{{ habit.name }}</p>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase">
+                             {{ habit.category }} / 累計 {{ habit.streak }}回
+                        </p>
+                    </div>
+                </div>
+                <a href="/habit/{{ habit.id }}" class="material-symbols-outlined text-gray-300 hover:text-text-main">chevron_right</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+<a href="/habit/add" class="fixed bottom-24 right-6 size-14 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 z-50 active:scale-90 transition-transform">
+    <span class="material-symbols-outlined text-text-main font-bold text-3xl">add</span>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. CSSエラー回避：バーの幅をJavaScriptでセット
+    const progressBar = document.getElementById('dynamic-progress-bar');
+    const rate = progressBar.getAttribute('data-rate');
+    progressBar.style.width = rate + '%';
+});
+
+// 2. JSエラー回避：達成トグル処理
+function handleToggle(button) {
+    const habitId = button.getAttribute('data-habit-id');
+    
+    fetch(`/habit/toggle/${habitId}`, { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(() => {
+        // 更新後にリロードして最新の進捗率を反映
+        location.reload(); 
+    });
+}
+</script>
+{% endblock %}
