@@ -76,7 +76,7 @@
 
 ## 実際の動作
 
-![alt text](docs/images/demo.gif)
+![alt text](demo.gif)
 
 ### GIFで見せる流れ
 
@@ -276,34 +276,34 @@ Today's Progress
 
 ## Login
 
-![alt text](docs/images/login.png)
+![alt text](login.png)
 
 ---
 
 ## Signup
 
-![alt text](docs/images/signup.png)
+![alt text](signup.png)
 
 ---
 ## Home
 
-![alt text](docs/images/home.png)
+![alt text](home.png)
 
 ---
 
 ## Add Habit
 
-![alt text](docs/images/add-habit.png)
+![alt text](add-habit.png)
 
 ---
 
 ## Habit Detail
 
-![alt text](docs/images/detail.png)
+![alt text](detail.png)
 
 ---
 
-# 🏗 システム構成
+# システム構成
 
 本アプリは、
 
@@ -352,7 +352,7 @@ SQLite
 
 ## システム構成図
 
-![alt text](docs/images/system-architecture.png)
+![alt text](system-architecture.png)
 
 ---
 
@@ -424,7 +424,7 @@ habit_id
 
 ## ER図
 
-![alt text](docs/images/er-diagram.png)
+![alt text](er-diagram.png)
 
 ---
 
@@ -508,8 +508,6 @@ habit_tracker0.1/
         ├── add-habit.png
         └── detail.png
 ```
-
----
 
 # Development Documents
 
@@ -862,11 +860,11 @@ Flaskが表示するローカルURLへブラウザからアクセスします。
 
 # 📖 Documents
 
-| 資料                                 | 内容                 |
-| ---------------------------------- | ------------------ |
-| [企画書](docs/01_習慣化アプリ企画書.pdf)       | 開発目的・課題・技術選定       |
-| [要件定義書](docs/02_習慣化アプリ要件定義書.pdf)   | 機能・非機能要件           |
-| [設計書](docs/03_習慣化アプリ設計書.pdf)       | DB・画面・ルーティング・処理フロー |
+| 資料 | 内容 |
+| --- | --- |
+| [企画書](docs/01_習慣化アプリ企画書.pdf) | 開発目的・課題・技術選定 |
+| [要件定義書](docs/02_習慣化アプリ要件定義書.pdf) | 機能・非機能要件 |
+| [設計書](docs/03_習慣化アプリ設計書.pdf) | DB・画面・ルーティング・処理フロー |
 
 ---
 
