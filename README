@@ -10,27 +10,27 @@
 
 # 📌 Project Overview
 
-| 項目              | 内容                         |
-| --------------- | -------------------------- |
-| アプリ名            | Life                       |
-| 種別              | 習慣化・進捗管理Webアプリ             |
-| 開発形態            | 個人開発                       |
-| 開発時期            | 2025年12月21日 ～ 2026年6月17日   |
-| 実作業期間           | 授業と並行して断続的に開発したため正確な工数は未計測 |
-| Backend         | Python / Flask             |
-| Database        | SQLite                     |
-| ORM             | Flask-SQLAlchemy           |
-| Authentication  | Flask-Login                |
-| Password Hash   | Flask-Bcrypt               |
-| Frontend        | HTML / CSS / JavaScript    |
-| Template        | Jinja2                     |
-| UI              | Tailwind CSS               |
-| Version Control | Git / GitHub               |
-| Deploy          | 未実施                        |
+| 項目 | 内容 |
+| ---  | --- |
+| アプリ名 | Life |
+| 種別 | 習慣化・進捗管理Webアプリ |
+| 開発形態 | 個人開発 |
+| 開発時期 | 2025年12月21日 ～ 2026年6月17日 |
+| 実作業期間 | 授業と並行して断続的に開発したため正確な工数は未計測 |
+| Backend | Python / Flask |
+| Database | SQLite |
+| ORM | Flask-SQLAlchemy |
+| Authentication | Flask-Login |
+| Password Hash | Flask-Bcrypt |
+| Frontend | HTML / CSS / JavaScript |
+| Template | Jinja2 |
+| UI | Tailwind CSS |
+| Version Control | Git / GitHub |
+| Deploy | 未実施 |
 
 ---
 
-# 🎯 開発背景
+# 開発背景
 
 本アプリを開発した当時は、HTML / CSS / JavaScriptについて基本的な内容を学習している段階でした。
 
@@ -72,23 +72,11 @@
 
 ---
 
-# 🎥 Demo
+# Demo
 
 ## 実際の動作
 
 ![alt text](docs/images/demo.gif)
-
-配置ファイル：
-
-```text
-docs/images/demo.gif
-```
-
-README：
-
-```md
-![Life Demo](docs/images/demo.gif)
-```
 
 ### GIFで見せる流れ
 
@@ -109,12 +97,9 @@ README：
  ↓
 履歴確認
 ```
-
-30秒程度にまとめる予定です。
-
 ---
 
-# ✨ 主な機能
+# 主な機能
 
 ## 1. ユーザー登録
 
@@ -281,7 +266,7 @@ Today's Progress
 
 ---
 
-# 📱 Screenshots
+# Screenshots
 
 このセクションには**実際に完成したアプリの画面**を掲載します。
 
@@ -293,53 +278,16 @@ Today's Progress
 
 ![alt text](docs/images/login.png)
 
-配置：
-
-```text
-docs/images/login.png
-```
-
-README：
-
-```md
-![ログイン画面](docs/images/login.png)
-```
-
 ---
 
 ## Signup
 
 ![alt text](docs/images/signup.png)
 
-配置：
-
-```text
-docs/images/signup.png
-```
-
-README：
-
-```md
-![新規登録画面](docs/images/signup.png)
-```
-
 ---
-
 ## Home
 
 ![alt text](docs/images/home.png)
-
-配置：
-
-```text
-docs/images/home.png
-```
-
-README：
-
-```md
-![ホーム画面](docs/images/home.png)
-```
 
 ---
 
@@ -347,35 +295,11 @@ README：
 
 ![alt text](docs/images/add-habit.png)
 
-配置：
-
-```text
-docs/images/add-habit.png
-```
-
-README：
-
-```md
-![習慣追加画面](docs/images/add-habit.png)
-```
-
 ---
 
 ## Habit Detail
 
 ![alt text](docs/images/detail.png)
-
-配置：
-
-```text
-docs/images/detail.png
-```
-
-README：
-
-```md
-![習慣詳細画面](docs/images/detail.png)
-```
 
 ---
 
@@ -429,18 +353,6 @@ SQLite
 ## システム構成図
 
 ![alt text](docs/images/system-architecture.png)
-
-配置：
-
-```text
-docs/images/system-architecture.png
-```
-
-README：
-
-```md
-![システム構成図](docs/images/system-architecture.png)
-```
 
 ---
 
@@ -514,66 +426,54 @@ habit_id
 
 ![alt text](docs/images/er-diagram.png)
 
-配置：
-
-```text
-docs/images/er-diagram.png
-```
-
-README：
-
-```md
-![ER図](docs/images/er-diagram.png)
-```
-
 ---
 
 # 🛠 使用技術
 
 ## Backend
 
-| 技術               | 用途          |
-| ---------------- | ----------- |
-| Python           | バックエンド      |
-| Flask            | Webアプリケーション |
-| Flask-Login      | ログイン状態管理    |
-| Flask-Bcrypt     | パスワードハッシュ   |
-| Flask-SQLAlchemy | ORM         |
+| 技術 | 用途 |
+| --- | --- |
+| Python | バックエンド |
+| Flask | Webアプリケーション |
+| Flask-Login | ログイン状態管理 |
+| Flask-Bcrypt | パスワードハッシュ |
+| Flask-SQLAlchemy | ORM |
 
 ---
 
 ## Database
 
-| 技術     | 用途           |
-| ------ | ------------ |
+| 技術 | 用途 |
+| --- | --- |
 | SQLite | ユーザー・習慣・履歴保存 |
 
 ---
 
 ## Frontend
 
-| 技術           | 用途          |
-| ------------ | ----------- |
-| HTML         | Webページ      |
-| CSS          | UI          |
-| JavaScript   | 達成処理など      |
-| Jinja2       | Flaskテンプレート |
-| Tailwind CSS | UIスタイリング    |
+| 技術 | 用途 |
+| --- | --- |
+| HTML | Webページ |
+| CSS | UI |
+| JavaScript | 達成処理など |
+| Jinja2 | Flaskテンプレート |
+| Tailwind CSS | UIスタイリング |
 
 ---
 
 ## Development
 
-| 技術           | 用途         |
-| ------------ | ---------- |
-| venv         | Python仮想環境 |
-| Git          | バージョン管理    |
-| GitHub       | ソースコード管理   |
-| WSL / Ubuntu | 開発環境       |
+| 技術 | 用途 |
+| --- | --- |
+| venv | Python仮想環境 |
+| Git | バージョン管理 |
+| GitHub | ソースコード管理 |
+| WSL / Ubuntu | 開発環境 |
 
 ---
 
-# 📂 Directory Structure
+# Directory Structure
 
 ```text
 habit_tracker0.1/
@@ -611,7 +511,7 @@ habit_tracker0.1/
 
 ---
 
-# 📚 Development Documents
+# Development Documents
 
 本開発では、実装前に企画・要件定義・設計・画面設計を行いました。
 
@@ -621,13 +521,9 @@ habit_tracker0.1/
 
 ## 01. 企画書
 
-### 📄 習慣化アプリ企画書
+### 習慣化アプリ企画書
 
 [text](docs/01_習慣化アプリ企画書.pdf)
-
-```text
-docs/01_習慣化アプリ企画書.pdf
-```
 
 ここでは、
 
@@ -641,23 +537,11 @@ docs/01_習慣化アプリ企画書.pdf
 
 を整理しています。
 
-READMEリンク：
-
-```md
-[📄 企画書を見る](docs/01_習慣化アプリ企画書.pdf)
-```
-
 ---
 
 ## 02. 要件定義書
 
 ### 📄 習慣化アプリ要件定義書
-
-[text](docs/02_習慣化アプリ要件定義書.pdf)
-
-```text
-docs/02_習慣化アプリ要件定義書.pdf
-```
 
 以下について整理しています。
 
@@ -674,16 +558,14 @@ docs/02_習慣化アプリ要件定義書.pdf
 READMEリンク：
 
 ```md
-[📄 要件定義書を見る](docs/02_習慣化アプリ要件定義書.pdf)
+[要件定義書を見る](docs/02_習慣化アプリ要件定義書.pdf)
 ```
 
 ---
 
 ## 03. 設計書
 
-### 📄 習慣化アプリ設計書
-
-[text](docs/03_習慣化アプリ設計書.pdf)
+### 習慣化アプリ設計書
 
 ```text
 docs/03_習慣化アプリ設計書.pdf
@@ -705,40 +587,12 @@ docs/03_習慣化アプリ設計書.pdf
 READMEリンク：
 
 ```md
-[📄 設計書を見る](docs/03_習慣化アプリ設計書.pdf)
+[設計書を見る](docs/03_習慣化アプリ設計書.pdf)
 ```
 
 ---
 
-## 04. 画面設計
-
-### 📄 習慣化アプリ画面設計
-
-
-
-```text
-docs/04_習慣化アプリ画面設計機能.pdf
-```
-
-以下の画面についてUI設計を行いました。
-
-```text
-Login
-Register
-Dashboard
-Add Habit
-Habit Detail
-```
-
-READMEリンク：
-
-```md
-[📄 画面設計資料を見る](docs/04_習慣化アプリ画面設計機能.pdf)
-```
-
----
-
-# 🔄 Development Flow
+# Development Flow
 
 今回の開発では、以下の順序で進めました。
 
@@ -768,7 +622,7 @@ UI調整
 
 ---
 
-# 🧠 開発で学んだこと
+# 開発で学んだこと
 
 ## HTML
 
@@ -877,7 +731,7 @@ Bcrypt
 
 ---
 
-# ⚠️ 現在の課題
+# 現在の課題
 
 ## UI表記
 
@@ -942,7 +796,7 @@ Flaskバックエンドを使用しているため、GitHub Pages単体ではア
 
 ---
 
-# 🔧 今後の改善
+# 今後の改善
 
 今後は、
 
@@ -963,7 +817,7 @@ Flaskバックエンドを使用しているため、GitHub Pages単体ではア
 
 ---
 
-# 🚀 Setup
+# Setup
 
 ## Clone
 
