@@ -1,0 +1,1023 @@
+# Life - 習慣化支援Webアプリ
+
+日々の習慣を登録し、毎日の達成状況を記録・可視化することで、習慣の継続を支援するWebアプリケーションです。
+
+ユーザーはアカウントを作成し、自分の習慣を登録できます。毎日の達成状況を記録することで、達成率・累計達成回数・過去の達成履歴などを確認できます。
+
+本アプリは、HTML / CSS / JavaScript、Flask、SQLiteなどを組み合わせ、Webアプリケーション開発の基本的な構成を学習することを目的として個人開発しました。
+
+---
+
+# 📌 Project Overview
+
+| 項目              | 内容                         |
+| --------------- | -------------------------- |
+| アプリ名            | Life                       |
+| 種別              | 習慣化・進捗管理Webアプリ             |
+| 開発形態            | 個人開発                       |
+| 開発時期            | 2025年12月21日 ～ 2026年6月17日   |
+| 実作業期間           | 授業と並行して断続的に開発したため正確な工数は未計測 |
+| Backend         | Python / Flask             |
+| Database        | SQLite                     |
+| ORM             | Flask-SQLAlchemy           |
+| Authentication  | Flask-Login                |
+| Password Hash   | Flask-Bcrypt               |
+| Frontend        | HTML / CSS / JavaScript    |
+| Template        | Jinja2                     |
+| UI              | Tailwind CSS               |
+| Version Control | Git / GitHub               |
+| Deploy          | 未実施                        |
+
+---
+
+# 🎯 開発背景
+
+本アプリを開発した当時は、HTML / CSS / JavaScriptについて基本的な内容を学習している段階でした。
+
+大学での開発ではバックエンド側を担当する機会が多く、データベース・フロントエンド・バックエンドについて必要最低限の知識はありましたが、Webアプリケーション全体を一人で構築する経験は多くありませんでした。
+
+そこで、
+
+* HTMLによる画面作成
+* CSSによるUIデザイン
+* JavaScriptによる画面動作
+* Flaskによるバックエンド処理
+* SQLiteによるデータ保存
+* SQLAlchemyによるORM
+* ユーザー登録
+* ログイン認証
+* パスワードハッシュ化
+* CRUD処理
+
+を一つのWebアプリケーションとして組み合わせることを目的として開発しました。
+
+---
+
+# 💡 解決したい課題
+
+習慣を継続する際には、
+
+* 続けたいと思っていても三日坊主になる
+* 毎日の達成状況が分からない
+* 自分がどの程度継続できているか分かりにくい
+* 紙やメモでは記録の集計が難しい
+
+といった問題があります。
+
+そこで、習慣と達成状況をデータとして記録し、
+
+> **「自分がどれだけ継続できているのかを見えるようにする」**
+
+ことを目的としました。
+
+---
+
+# 🎥 Demo
+
+## 実際の動作
+
+![alt text](docs/images/demo.gif)
+
+配置ファイル：
+
+```text
+docs/images/demo.gif
+```
+
+README：
+
+```md
+![Life Demo](docs/images/demo.gif)
+```
+
+### GIFで見せる流れ
+
+```text
+新規登録
+ ↓
+ログイン
+ ↓
+習慣追加
+ ↓
+ホーム画面
+ ↓
+習慣達成
+ ↓
+達成率更新
+ ↓
+習慣詳細
+ ↓
+履歴確認
+```
+
+30秒程度にまとめる予定です。
+
+---
+
+# ✨ 主な機能
+
+## 1. ユーザー登録
+
+以下の情報を入力してアカウントを作成できます。
+
+* ユーザー名
+* メールアドレス
+* パスワード
+* パスワード確認
+
+登録時にはパスワードと確認用パスワードの一致確認を行います。
+
+一致した場合、Flask-Bcryptを利用してパスワードをハッシュ化してからSQLiteへ保存します。
+
+```text
+入力パスワード
+ ↓
+確認
+ ↓
+Bcrypt
+ ↓
+ハッシュ化
+ ↓
+SQLite
+```
+
+---
+
+## 2. ログイン / ログアウト
+
+メールアドレスとパスワードを利用してログインできます。
+
+ログイン時は、データベースに保存されているパスワードハッシュと入力されたパスワードをBcryptで照合します。
+
+認証成功後はFlask-Loginを利用してログイン状態を管理します。
+
+---
+
+## 3. 習慣登録
+
+ログインユーザーは新しい習慣を登録できます。
+
+登録項目：
+
+* 習慣名
+* カテゴリ
+* 頻度
+* 開始日
+
+現在のカテゴリ：
+
+```text
+健康
+学習
+仕事
+趣味
+```
+
+現在の頻度：
+
+```text
+毎日
+週末のみ
+```
+
+---
+
+## 4. 習慣一覧
+
+ホーム画面では、現在ログインしているユーザーに紐付いた習慣を一覧表示します。
+
+表示内容：
+
+* 習慣名
+* カテゴリ
+* 累計達成回数
+* 今日の達成状態
+
+---
+
+## 5. 習慣達成記録
+
+各習慣のチェックボタンを押すことで、その日の達成状況を記録できます。
+
+JavaScriptの `fetch()` を使用してFlaskへPOSTしています。
+
+```text
+達成ボタン
+ ↓
+JavaScript fetch()
+ ↓
+Flask
+ ↓
+HabitLog
+ ↓
+SQLite
+```
+
+同じ日付の記録が存在する場合は削除し、存在しない場合は新しく登録します。
+
+---
+
+## 6. 今日の達成率
+
+今日登録されている習慣に対して、
+
+```text
+今日達成した習慣数
+─────────────── × 100
+登録習慣数
+```
+
+として今日の達成率を算出します。
+
+ホーム画面上部に、
+
+```text
+Today's Progress
+
+75%
+```
+
+のように表示します。
+
+---
+
+## 7. 習慣ごとの進捗
+
+習慣単位でも進捗率を計算します。
+
+```text
+累計達成回数
+────────────── × 100
+開始日からの経過日数
+```
+
+によって算出しています。
+
+---
+
+## 8. 習慣詳細
+
+習慣詳細画面では、
+
+* 習慣名
+* 累計達成回数
+* 過去の達成履歴
+
+を確認できます。
+
+---
+
+## 9. 習慣削除
+
+登録済みの習慣を削除できます。
+
+削除前には、
+
+```text
+本当に削除しますか？
+```
+
+という確認ダイアログを表示します。
+
+---
+
+# 📱 Screenshots
+
+このセクションには**実際に完成したアプリの画面**を掲載します。
+
+画面設計資料の画像ではなく、可能であればブラウザ上で実際に動作している現在の画面をスクリーンショットして掲載します。
+
+---
+
+## Login
+
+![alt text](docs/images/login.png)
+
+配置：
+
+```text
+docs/images/login.png
+```
+
+README：
+
+```md
+![ログイン画面](docs/images/login.png)
+```
+
+---
+
+## Signup
+
+![alt text](docs/images/signup.png)
+
+配置：
+
+```text
+docs/images/signup.png
+```
+
+README：
+
+```md
+![新規登録画面](docs/images/signup.png)
+```
+
+---
+
+## Home
+
+![alt text](docs/images/home.png)
+
+配置：
+
+```text
+docs/images/home.png
+```
+
+README：
+
+```md
+![ホーム画面](docs/images/home.png)
+```
+
+---
+
+## Add Habit
+
+![alt text](docs/images/add-habit.png)
+
+配置：
+
+```text
+docs/images/add-habit.png
+```
+
+README：
+
+```md
+![習慣追加画面](docs/images/add-habit.png)
+```
+
+---
+
+## Habit Detail
+
+![alt text](docs/images/detail.png)
+
+配置：
+
+```text
+docs/images/detail.png
+```
+
+README：
+
+```md
+![習慣詳細画面](docs/images/detail.png)
+```
+
+---
+
+# 🏗 システム構成
+
+本アプリは、
+
+```text
+Browser
+ ↓
+Flask
+ ↓
+SQLite
+```
+
+というシンプルなWebアプリケーション構成です。
+
+```text
+┌──────────────────────────────┐
+│           Browser            │
+│                              │
+│ HTML                         │
+│ CSS                          │
+│ JavaScript                   │
+│ Jinja2                       │
+│ Tailwind CSS                 │
+└──────────────┬───────────────┘
+               │
+               │ HTTP
+               ▼
+┌──────────────────────────────┐
+│            Flask             │
+│                              │
+│ Routing                      │
+│ Authentication               │
+│ Habit Management             │
+│ Progress Calculation         │
+└──────────────┬───────────────┘
+               │
+               │ SQLAlchemy
+               ▼
+┌──────────────────────────────┐
+│            SQLite            │
+│                              │
+│ User                         │
+│ Habit                        │
+│ HabitLog                     │
+└──────────────────────────────┘
+```
+
+## システム構成図
+
+![alt text](docs/images/system-architecture.png)
+
+配置：
+
+```text
+docs/images/system-architecture.png
+```
+
+README：
+
+```md
+![システム構成図](docs/images/system-architecture.png)
+```
+
+---
+
+# 🗄 Database
+
+SQLiteを使用しています。
+
+主に以下の3モデルでデータを管理します。
+
+```text
+User
+ │
+ │ 1 : N
+ ▼
+Habit
+ │
+ │ 1 : N
+ ▼
+HabitLog
+```
+
+## User
+
+ユーザー情報を管理します。
+
+主なカラム：
+
+```text
+id
+username
+email
+password
+```
+
+---
+
+## Habit
+
+登録した習慣を管理します。
+
+主なカラム：
+
+```text
+id
+name
+category
+frequency
+start_date
+user_id
+```
+
+`user_id` によってUserと紐付けています。
+
+---
+
+## HabitLog
+
+習慣の達成履歴を保存します。
+
+```text
+id
+date
+habit_id
+```
+
+`habit_id` によってHabitと紐付けています。
+
+---
+
+## ER図
+
+![alt text](docs/images/er-diagram.png)
+
+配置：
+
+```text
+docs/images/er-diagram.png
+```
+
+README：
+
+```md
+![ER図](docs/images/er-diagram.png)
+```
+
+---
+
+# 🛠 使用技術
+
+## Backend
+
+| 技術               | 用途          |
+| ---------------- | ----------- |
+| Python           | バックエンド      |
+| Flask            | Webアプリケーション |
+| Flask-Login      | ログイン状態管理    |
+| Flask-Bcrypt     | パスワードハッシュ   |
+| Flask-SQLAlchemy | ORM         |
+
+---
+
+## Database
+
+| 技術     | 用途           |
+| ------ | ------------ |
+| SQLite | ユーザー・習慣・履歴保存 |
+
+---
+
+## Frontend
+
+| 技術           | 用途          |
+| ------------ | ----------- |
+| HTML         | Webページ      |
+| CSS          | UI          |
+| JavaScript   | 達成処理など      |
+| Jinja2       | Flaskテンプレート |
+| Tailwind CSS | UIスタイリング    |
+
+---
+
+## Development
+
+| 技術           | 用途         |
+| ------------ | ---------- |
+| venv         | Python仮想環境 |
+| Git          | バージョン管理    |
+| GitHub       | ソースコード管理   |
+| WSL / Ubuntu | 開発環境       |
+
+---
+
+# 📂 Directory Structure
+
+```text
+habit_tracker0.1/
+├── instance/
+│   └── life_app.db
+│
+├── templates/
+│   ├── add_habit.html
+│   ├── base.html
+│   ├── detail.html
+│   ├── home.html
+│   ├── login.html
+│   └── signup.html
+│
+├── .gitignore
+├── app.py
+├── requirements.txt
+├── README.md
+│
+└── docs/
+    ├── 01_習慣化アプリ企画書.pdf
+    ├── 02_習慣化アプリ要件定義書.pdf
+    ├── 03_習慣化アプリ設計書.pdf
+    │
+    └── images/
+        ├── demo.gif
+        ├── system-architecture.png
+        ├── er-diagram.png
+        ├── login.png
+        ├── signup.png
+        ├── home.png
+        ├── add-habit.png
+        └── detail.png
+```
+
+---
+
+# 📚 Development Documents
+
+本開発では、実装前に企画・要件定義・設計・画面設計を行いました。
+
+詳細資料については `docs/` 以下に配置しています。
+
+---
+
+## 01. 企画書
+
+### 📄 習慣化アプリ企画書
+
+[text](docs/01_習慣化アプリ企画書.pdf)
+
+```text
+docs/01_習慣化アプリ企画書.pdf
+```
+
+ここでは、
+
+* 開発目的
+* 解決したい課題
+* アプリ概要
+* 使用技術
+* 開発意義
+* ER図
+* 画面構想
+
+を整理しています。
+
+READMEリンク：
+
+```md
+[📄 企画書を見る](docs/01_習慣化アプリ企画書.pdf)
+```
+
+---
+
+## 02. 要件定義書
+
+### 📄 習慣化アプリ要件定義書
+
+[text](docs/02_習慣化アプリ要件定義書.pdf)
+
+```text
+docs/02_習慣化アプリ要件定義書.pdf
+```
+
+以下について整理しています。
+
+* システム概要
+* 対象ユーザー
+* ユーザー管理
+* 習慣管理
+* 達成記録
+* 履歴
+* 非機能要件
+* セキュリティ
+* 開発環境
+
+READMEリンク：
+
+```md
+[📄 要件定義書を見る](docs/02_習慣化アプリ要件定義書.pdf)
+```
+
+---
+
+## 03. 設計書
+
+### 📄 習慣化アプリ設計書
+
+[text](docs/03_習慣化アプリ設計書.pdf)
+
+```text
+docs/03_習慣化アプリ設計書.pdf
+```
+
+ここでは、
+
+* システム構成
+* 画面一覧
+* ER図
+* テーブル構成
+* ルーティング
+* 認証フロー
+* 習慣登録フロー
+* 達成記録フロー
+
+などを整理しています。
+
+READMEリンク：
+
+```md
+[📄 設計書を見る](docs/03_習慣化アプリ設計書.pdf)
+```
+
+---
+
+## 04. 画面設計
+
+### 📄 習慣化アプリ画面設計
+
+
+
+```text
+docs/04_習慣化アプリ画面設計機能.pdf
+```
+
+以下の画面についてUI設計を行いました。
+
+```text
+Login
+Register
+Dashboard
+Add Habit
+Habit Detail
+```
+
+READMEリンク：
+
+```md
+[📄 画面設計資料を見る](docs/04_習慣化アプリ画面設計機能.pdf)
+```
+
+---
+
+# 🔄 Development Flow
+
+今回の開発では、以下の順序で進めました。
+
+```text
+企画
+ ↓
+要件定義
+ ↓
+画面設計
+ ↓
+DB設計
+ ↓
+Flask環境構築
+ ↓
+ユーザー登録
+ ↓
+ログイン
+ ↓
+習慣CRUD
+ ↓
+達成履歴
+ ↓
+UI調整
+```
+
+設計だけで終わらせるのではなく、設計内容をFlask・SQLiteを利用して実装することで、Webアプリケーション開発全体を経験しました。
+
+---
+
+# 🧠 開発で学んだこと
+
+## HTML
+
+HTMLについては基本的なタグやフォーム構造を覚えることで比較的早く実装できるようになりました。
+
+一方で、HTMLだけではUIを作り込めないため、CSSの重要性を強く感じました。
+
+---
+
+## CSS / UI
+
+CSSについては、
+
+* レイアウト
+* サイズ
+* 余白
+* 配色
+* ボタン
+* フォーム
+* ホバー
+* アニメーション
+* レスポンシブな表示
+
+など考える項目が多く、HTMLよりも難しさを感じました。
+
+複数のWebサイトやUIを参考にしながら、
+
+> 「機能として動く画面」と「ユーザーが使いやすい画面」は異なる
+
+ことを学びました。
+
+---
+
+## Flask
+
+Flaskを利用することで、
+
+```text
+HTML
+ ↓
+Flask Route
+ ↓
+Python
+ ↓
+Database
+```
+
+というWebアプリケーションの基本的な処理を実際に実装しました。
+
+---
+
+## Database
+
+User・Habit・HabitLogを分離し、
+
+```text
+ユーザー
+ ↓
+習慣
+ ↓
+達成履歴
+```
+
+として管理しました。
+
+これによって、
+
+* Primary Key
+* Foreign Key
+* 1対多
+* ORM
+
+について実装を通して理解しました。
+
+---
+
+## Password Security
+
+今回特に学習したことの一つがパスワード管理です。
+
+最初からパスワードをDBへそのまま保存するのではなく、Flask-Bcryptを利用して、
+
+```text
+Password
+ ↓
+Hash
+ ↓
+Database
+```
+
+として保存しました。
+
+ログイン時には、
+
+```text
+入力パスワード
+     +
+保存済みハッシュ
+     ↓
+Bcrypt
+     ↓
+認証
+```
+
+としています。
+
+---
+
+# ⚠️ 現在の課題
+
+## UI表記
+
+現在、日本語UIの中に、
+
+```text
+Today's Progress
+Habit Name
+Category
+Frequency
+Past Records
+```
+
+など英語表記が残っています。
+
+多言語対応を行っているわけではないため、UI言語を日本語に統一する必要があります。
+
+---
+
+## 習慣管理機能の独自性
+
+現在は、
+
+```text
+習慣登録
+ ↓
+達成
+ ↓
+進捗
+ ↓
+履歴
+```
+
+という一般的な習慣管理機能が中心です。
+
+そのため、既存サービスとの差別化という点では改善余地があります。
+
+---
+
+## 操作ログ
+
+現在は、
+
+* ログイン
+* 習慣追加
+* 習慣削除
+* 達成
+
+といった操作履歴を別途ログとして保存していません。
+
+将来的にはユーザー行動の分析にも利用できるよう、操作ログを追加したいと考えています。
+
+---
+
+## Deploy
+
+現在はローカル環境で実行しており、一般公開はしていません。
+
+Flaskバックエンドを使用しているため、GitHub Pages単体ではアプリ全体を動作させることはできません。
+
+将来的にはFlaskを実行可能なホスティング環境を利用して公開したいと考えています。
+
+---
+
+# 🔧 今後の改善
+
+今後は、
+
+* UI表記の統一
+* 習慣編集機能
+* カレンダー表示
+* 正確な連続達成日数
+* 操作ログ
+* 習慣分析
+* エラーハンドリング
+* バリデーション
+* テストコード
+* SECRET_KEYの環境変数化
+* 認可処理の強化
+* 本番環境へのデプロイ
+
+などを改善候補としています。
+
+---
+
+# 🚀 Setup
+
+## Clone
+
+```bash
+git clone <repository-url>
+cd habit_tracker0.1
+```
+
+## Virtual Environment
+
+```bash
+python3 -m venv venv
+```
+
+Linux / WSL：
+
+```bash
+source venv/bin/activate
+```
+
+Windows：
+
+```powershell
+.\venv\Scripts\activate
+```
+
+## Install
+
+```bash
+pip install -r requirements.txt
+```
+
+## Run
+
+```bash
+python app.py
+```
+
+Flaskが表示するローカルURLへブラウザからアクセスします。
+
+---
+
+# 📖 Documents
+
+| 資料                                 | 内容                 |
+| ---------------------------------- | ------------------ |
+| [企画書](docs/01_習慣化アプリ企画書.pdf)       | 開発目的・課題・技術選定       |
+| [要件定義書](docs/02_習慣化アプリ要件定義書.pdf)   | 機能・非機能要件           |
+| [設計書](docs/03_習慣化アプリ設計書.pdf)       | DB・画面・ルーティング・処理フロー |
+
+---
+
+# 📝 Note
+
+本アプリはWebアプリケーション開発の基礎技術を学ぶことを主目的として制作した個人開発ポートフォリオです。
+
+企画・要件定義・設計・実装まで一連の工程を行い、Flaskを中心としてフロントエンド・バックエンド・データベース・認証を組み合わせたWebアプリケーションを構築しました。
